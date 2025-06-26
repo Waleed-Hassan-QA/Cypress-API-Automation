@@ -36,7 +36,7 @@ it('Get User', ()=>{
 
      })
 })
-it('Get User - Invalid URL', ()=>{
+it('Get User - Invalid EndPoint', ()=>{
 
      cy.request({
              
