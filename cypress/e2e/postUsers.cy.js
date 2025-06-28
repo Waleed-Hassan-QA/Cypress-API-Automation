@@ -11,7 +11,7 @@ describe('POST - API Automation', () => {
         return email
     }
 
-    it('POST - Create New User', () => {
+    it('POST Call - Create New User', () => {
 
         let emailAddress = generateRandomEmail()
         let payLoad = {
@@ -44,7 +44,7 @@ describe('POST - API Automation', () => {
     })
 
 
-    it('POST - Create New User & verify from GET API', () => {
+    it('POST Call - Create New User & Verify from GET API', () => {
 
         let emailAddress = generateRandomEmail()
 
@@ -90,7 +90,7 @@ describe('POST - API Automation', () => {
     })
 
 
-    it('Create dublicate user', () => {
+    it('POST Call - Create Dublicate User || Negative Case', () => {
 
         cy.fixture('users').then((userData) => {
 
@@ -116,7 +116,7 @@ describe('POST - API Automation', () => {
 
     })
 
-    it('Create User with An Invalid Token', () => {
+    it('POST Call - Invalid Token || Negative Case  ', () => {
 
         cy.fixture('users').then((userData) => {
 
@@ -125,7 +125,7 @@ describe('POST - API Automation', () => {
                 method: 'POST',
                 url: url,
                 headers: {
-                    Authorization: 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e061'
+                    Authorization: 'Bearer eb906c'
                 },
                 failOnStatusCode: false,
                 body: userData,
@@ -141,7 +141,7 @@ describe('POST - API Automation', () => {
 
     })
 
-it('Create User with An Invalid End Point', () => {
+it('POST Call - Invalid End Point || Negative Case', () => {
 
         cy.fixture('users').then((userData) => {
 
