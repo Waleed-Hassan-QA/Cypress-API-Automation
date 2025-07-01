@@ -90,7 +90,7 @@ describe('POST - API Automation', () => {
     })
 
 
-    it('POST Call - Create Dublicate User || Negative Case', () => {
+    it('POST Call -  Dublicate Data || Negative Case', () => {
 
         cy.fixture('users').then((userData) => {
 
@@ -115,6 +115,34 @@ describe('POST - API Automation', () => {
         })
 
     })
+
+    it('POST Call -  Validation Check || Wrong Data || Negative Case', () => {
+
+        cy.fixture('users').then((userData) => {
+
+            userData.email = null
+            cy.request({
+                method: 'POST',
+                url: url,
+                headers: {
+                    Authorization: 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
+                },
+                failOnStatusCode: false,
+                body: userData,
+
+            }).then((response) => {
+
+                expect(response.status).to.be.equal(422)
+                let error = response.body
+                expect(error[0]).has.property('field', 'email')
+                expect(error[0]).has.property('message', "can't be blank")
+                cy.log(error)
+            })
+
+        })
+
+    })
+
 
     it('POST Call - Invalid Token || Negative Case  ', () => {
 
