@@ -60,6 +60,31 @@ it('PUT Call - Invalid User ID || Negative Case', () => {
 
     })
 
+    it('PUT Call - Validation Checks || Negative Case', () => {
+
+        cy.request({
+
+            method: 'PUT',
+            url: url+userId,
+            headers: {
+                Authorization: token
+            },
+            failOnStatusCode: false,
+            body: {
+                "name": "",
+                "email": "",
+                "gender": "",
+                "status": ""
+            }
+        }).then((response) => {
+
+            expect(response.status).to.be.equal(422)
+         
+
+        })
+
+    })
+
     it('PUT Call - Invalid End Point || Negative Case', () => {
 
         cy.request({
