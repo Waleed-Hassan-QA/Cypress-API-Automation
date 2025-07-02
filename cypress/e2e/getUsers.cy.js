@@ -2,14 +2,20 @@
 
 describe('GET -- API Automation',()=>{
 
-it('Get All Users', ()=>{
+const url = 'https://gorest.co.in/public/v2/users/'
+const invalid_URL = 'https://gorest.co.in/public/v2/user'
+const token = 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
+let userID = 7979056
+
+it('GET CALL - Get All Users', ()=>{
 
     cy.request({
 
+
         method:'GET',
-        url:'https://gorest.co.in/public/v2/users',
+        url: url,
         headers:{
-            Authorization:'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
+            Authorization: token
         }
     }).then((response)=>{
         //cy.log(JSON.stringify(response))
@@ -18,32 +24,33 @@ it('Get All Users', ()=>{
 
 })
 
-it('Get User', ()=>{
+it('GET CALL - Get Single User', ()=>{
 
      cy.request({
              
         method:'GET',
-        url: 'https://gorest.co.in/public/v2/users/7439840',
+        url: url+userID,
         headers:{
-            Authoriazation:'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
-        }
+            Authoriazation:token
+        },
+        failOnStatusCode: false
 
      }).then((response)=>{
         
-        cy.log(JSON.stringify(response))
-        expect(response.status).to.equal(200)
-        expect(response.body.id).to.equal(7439840)
+        //cy.log(JSON.stringify(response))
+        expect(response.status).to.be.equal(200)
+        expect(response.body.id).to.equal(userID)
 
      })
 })
-it('Get User - Invalid EndPoint', ()=>{
+it('GET CALL - Invalid End Point || Negative Case', ()=>{
 
      cy.request({
              
         method:'GET',
-        url: 'https://gorest.co.in/public/v2/user',
+        url: invalid_URL,
         headers:{
-            Authoriazation:'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
+            Authoriazation:token
         },
         failOnStatusCode: false
 
@@ -53,14 +60,14 @@ it('Get User - Invalid EndPoint', ()=>{
 
      })
 })
-it('Get User - Invalid User', ()=>{
+it('GET CALL  - Invalid User || Negative Case', ()=>{
 
      cy.request({
              
         method:'GET',
-        url: 'https://gorest.co.in/public/v2/users/74398401',
+        url: url+ 74398401,
         headers:{
-            Authoriazation:'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
+            Authoriazation:token
         },
         failOnStatusCode: false
 
