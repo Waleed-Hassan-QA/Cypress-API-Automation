@@ -2,7 +2,8 @@
 
 describe('POST - API Automation', () => {
 
-    const url = 'https://gorest.co.in/public/v2/users'
+    //const url = 'https://gorest.co.in/public/v2/users'
+    const token = Cypress.env('token')
     const invalid_Url = 'https://gorest.co.in/public/v2/user'
 
     function generateRandomEmail() {
@@ -25,9 +26,9 @@ describe('POST - API Automation', () => {
         cy.request({
 
             method: 'POST',
-            url: url,
+            url: '/',
             headers: {
-                Authorization: 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
+                Authorization: token
             },
             body: payLoad
         }).then((response) => {
@@ -53,9 +54,9 @@ describe('POST - API Automation', () => {
             userData.email = emailAddress
             cy.request({
                 method: 'POST',
-                url: url,
+                url: '/',
                 headers: {
-                    Authorization: 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
+                    Authorization: token
                 },
                 body: userData
             }).then((response) => {
@@ -71,9 +72,9 @@ describe('POST - API Automation', () => {
 
                 cy.request({
                     method: 'GET',
-                    url: 'https://gorest.co.in/public/v2/users/' + id,
+                    url: '/' + id,
                     headers: {
-                        Authorization: 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
+                        Authorization: token
                     }
                 }).then((res) => {
 
@@ -96,9 +97,9 @@ describe('POST - API Automation', () => {
 
             cy.request({
                 method: 'POST',
-                url: url,
+                url: '/',
                 headers: {
-                    Authorization: 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
+                    Authorization: token
                 },
                 failOnStatusCode: false,
                 body: userData,
@@ -123,9 +124,9 @@ describe('POST - API Automation', () => {
             userData.email = null
             cy.request({
                 method: 'POST',
-                url: url,
+                url: '/',
                 headers: {
-                    Authorization: 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
+                    Authorization: token
                 },
                 failOnStatusCode: false,
                 body: userData,
@@ -134,66 +135,73 @@ describe('POST - API Automation', () => {
 
                 expect(response.status).to.be.equal(422)
                 let error = response.body
-                expect(error[0]).has.property('field', 'email')
-                expect(error[0]).has.property('message', "can't be blank")
-                cy.log(error)
-            })
 
+                for (var index in response.body) {
+                    expect(response.body[index].field).to.eq('email')
+                    expect(response.body[index].message).to.eq("can't be blank")
+        
+                }
+            })
+            // expect(error[0]).has.property('field', 'email')
+            // expect(error[0]).has.property('message', "can't be blank")
+            // cy.log(error)
         })
 
     })
-
 
     it('POST Call - Invalid Token || Negative Case  ', () => {
 
-        cy.fixture('users').then((userData) => {
+    cy.fixture('users').then((userData) => {
 
-            cy.request({
+        cy.request({
 
-                method: 'POST',
-                url: url,
-                headers: {
-                    Authorization: 'Bearer eb906c'
-                },
-                failOnStatusCode: false,
-                body: userData,
+            method: 'POST',
+            url: '/',
+            headers: {
+                Authorization: 'Bearer eb906c'
+            },
+            failOnStatusCode: false,
+            body: userData,
 
-            }).then((response) => {
+        }).then((response) => {
 
-                expect(response.status).to.be.equal(401)
-                expect(response.body.message).to.be.equal('Invalid token')
-                cy.log(response.body)
-            })
-
+            expect(response.status).to.be.equal(401)
+            expect(response.body.message).to.be.equal('Invalid token')
+            cy.log(response.body)
         })
 
     })
+
+})
 
 it('POST Call - Invalid End Point || Negative Case', () => {
 
-        cy.fixture('users').then((userData) => {
+    cy.fixture('users').then((userData) => {
 
-            cy.request({
+        cy.request({
 
-                method: 'POST',
-                url: invalid_Url,
-                headers: {
-                    Authorization: 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e061'
-                },
-                failOnStatusCode: false,
-                body: userData,
+            method: 'POST',
+            url: invalid_Url,
+            headers: {
+                Authorization: token
+            },
+            failOnStatusCode: false,
+            body: userData,
 
-            }).then((response) => {
+        }).then((response) => {
 
-                expect(response.status).to.be.equal(404)
-    
-            })
+            expect(response.status).to.be.equal(404)
 
         })
 
     })
 
-
-
+})
 
 })
+
+
+
+
+
+

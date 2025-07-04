@@ -2,10 +2,8 @@
 
 describe('PUT API - Automation', () => {
 
-
-    const url = 'https://gorest.co.in/public/v2/users/'
-    const token = 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
-    let userId = '7975662'
+    const token = Cypress.env('token')
+    let userId = '7983236'
 
     it('PUT Call - Update User Data', () => {
 
@@ -14,7 +12,7 @@ describe('PUT API - Automation', () => {
             cy.request({
 
                 method: 'PUT',
-                url: url + payload.id,
+                url: '/' + payload.id,
                 headers: {
                     Authorization: token
                 },
@@ -40,7 +38,7 @@ it('PUT Call - Invalid User ID || Negative Case', () => {
         cy.request({
 
             method: 'PUT',
-            url: url+1122334455,
+            url: '/'+ 1122334455,
             headers: {
                 Authorization: token
             },
@@ -65,7 +63,7 @@ it('PUT Call - Invalid User ID || Negative Case', () => {
         cy.request({
 
             method: 'PUT',
-            url: url+userId,
+            url: '/'+ userId,
             headers: {
                 Authorization: token
             },
@@ -90,7 +88,7 @@ it('PUT Call - Invalid User ID || Negative Case', () => {
         cy.request({
 
             method: 'PUT',
-            url: url,
+            url: '/',
             headers: {
                 Authorization: token
             },
@@ -114,7 +112,7 @@ it('PUT Call - Invalid User ID || Negative Case', () => {
         cy.request({
 
             method: 'PUT',
-            url: url+userId,
+            url: '/' + userId,
             headers: {
                 Authorization: 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e061'
             },
@@ -133,7 +131,6 @@ it('PUT Call - Invalid User ID || Negative Case', () => {
         })
 
     })
-
 
 
 })

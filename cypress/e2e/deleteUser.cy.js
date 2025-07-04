@@ -1,9 +1,6 @@
 describe('Delete API - Automation', () => {
 
-
-
-    const url = 'https://gorest.co.in/public/v2/users'
-    const token = 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
+    const token = Cypress.env('token')
 
 
     function generateRandomEmail() {
@@ -28,7 +25,7 @@ describe('Delete API - Automation', () => {
         cy.request({
 
             method: 'POST',
-            url: url,
+            url: '/',
             headers: {
                 Authorization: token
             },
@@ -48,7 +45,7 @@ describe('Delete API - Automation', () => {
             cy.request({
 
                 method: 'DELETE',
-                url: url + '/' + userID,
+                url: '/' + userID,
                 headers: {
                     Authorization: token
                 },
@@ -63,7 +60,7 @@ describe('Delete API - Automation', () => {
             cy.request({
 
                 method: 'GET',
-                url: url + '/' + userID,
+                url: '/' + userID,
                 headers: {
                     Authorization: token
                 },
@@ -86,7 +83,7 @@ describe('Delete API - Automation', () => {
         cy.request({
 
             method: 'GET',
-            url: url + '/' + 797566278,
+            url: '/' + 797566278,
             headers: {
                 Authorization: token
             },

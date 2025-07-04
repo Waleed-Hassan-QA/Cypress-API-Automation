@@ -2,10 +2,9 @@
 
 describe('GET -- API Automation',()=>{
 
-const url = 'https://gorest.co.in/public/v2/users/'
 const invalid_URL = 'https://gorest.co.in/public/v2/user'
-const token = 'Bearer eb906c43a292135c4a1cd99ec58b54af482fb068720f95e7e5ee3e64292e0610'
-let userID = 7979056
+const token = Cypress.env('token')
+let userID = 7983236
 
 it('GET CALL - Get All Users', ()=>{
 
@@ -13,7 +12,7 @@ it('GET CALL - Get All Users', ()=>{
 
 
         method:'GET',
-        url: url,
+        url: '/',
         headers:{
             Authorization: token
         }
@@ -29,9 +28,9 @@ it('GET CALL - Get Single User', ()=>{
      cy.request({
              
         method:'GET',
-        url: url+userID,
+        url: '/' + userID,
         headers:{
-            Authoriazation:token
+            Authorization:token
         },
         failOnStatusCode: false
 
@@ -39,7 +38,7 @@ it('GET CALL - Get Single User', ()=>{
         
         //cy.log(JSON.stringify(response))
         expect(response.status).to.be.equal(200)
-        expect(response.body.id).to.equal(userID)
+        expect(response.body.id).to.be.equal(7983236)
 
      })
 })
@@ -65,7 +64,7 @@ it('GET CALL  - Invalid User || Negative Case', ()=>{
      cy.request({
              
         method:'GET',
-        url: url+ 74398401,
+        url: '/'+ 74398401,
         headers:{
             Authoriazation:token
         },
