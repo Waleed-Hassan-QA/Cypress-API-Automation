@@ -4,8 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "get-api": "npx cypress run --spec cypress/e2e/getUsers.cy.js",
-    "post-api": "npx cypress run --spec cypress/e2e/postUsers.cy.js"
+    "get-api": "npx cypress run --spec cypress/e2e/getUsers.cy.js -b chrome",
+    "post-api": "npx cypress run --spec cypress/e2e/postUsers.cy.js -b chrome",
+    "put-api": "npx cypress run --spec cypress/e2e/updateUsers.cy.js -b chrome",
+    "delete-api": "npx cypress run --spec cypress/e2e/deleteUsers.cy.js -b chrome"
 
   },
   "repository": {
