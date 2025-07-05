@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "get-api": "npx cypress run --spec cypress/e2e/getUsers.cy.js",
+    "post-api": "npx cypress run --spec cypress/e2e/postUsers.cy.js"
+
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,7 @@
   "homepage": "https://github.com/Waleed-Hassan-QA/Cypress-API-Automation#readme",
   "description": "",
   "devDependencies": {
-    "cypress": "^14.5.0"
+    "cypress": "^14.5.0",
+    "cypress-mochawesome-reporter": "^3.8.2"
   }
 }
