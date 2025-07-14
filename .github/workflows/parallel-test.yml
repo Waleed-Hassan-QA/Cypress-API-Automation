@@ -12,6 +12,12 @@ jobs:
         uses: cypress-io/github-action@v6
         with: 
          command: npm run get-api
+      
+      - name: Cypress Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mochawesome HTML Report - Get API
+          path: cypress/reports/html
 
   Post-API-run:
     runs-on: ubuntu-24.04
@@ -25,6 +31,12 @@ jobs:
         with: 
          command: npm run post-api
 
+      - name: Cypress Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mochawesome HTML Report - Post API
+          path: cypress/reports/html
+
   Put-API-run:
     runs-on: ubuntu-24.04
     steps:
@@ -36,6 +48,12 @@ jobs:
         uses: cypress-io/github-action@v6
         with: 
          command: npm run put-api
+
+      - name: Cypress Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mochawesome HTML Report - Update API
+          path: cypress/reports/html
 
   Delete-API-run:
     runs-on: ubuntu-24.04
@@ -52,5 +70,5 @@ jobs:
       - name: Cypress Test Report
         uses: actions/upload-artifact@v4
         with:
-         name: Mochawesome HTML Report
+         name: Mochawesome HTML Report - Delete API
          path: cypress/reports/html
