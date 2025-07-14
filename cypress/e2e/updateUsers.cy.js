@@ -3,7 +3,7 @@
 describe('PUT API - Automation', () => {
 
     const token = Cypress.env('token')
-    let userId = '7983236'
+    let userId = 7995068
 
     it('PUT Call - Update User Data', () => {
 

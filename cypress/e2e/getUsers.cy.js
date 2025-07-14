@@ -4,7 +4,7 @@ describe('GET -- API Automation',()=>{
 
 const invalid_URL = 'https://gorest.co.in/public/v2/user'
 const token = Cypress.env('token')
-let userID = 7983236
+let userID = 7995068
 
 it('GET CALL - Get All Users', ()=>{
 
@@ -38,7 +38,7 @@ it('GET CALL - Get Single User', ()=>{
         
         //cy.log(JSON.stringify(response))
         expect(response.status).to.be.equal(200)
-        expect(response.body.id).to.be.equal(7983236)
+        expect(response.body.id).to.be.equal(userID)
 
      })
 })
